@@ -1,0 +1,10 @@
+CPU(s):                                  20
+Model name:                              12th Gen Intel(R) Core(TM) i7-12700H
+Thread(s) per core:                      2
+Core(s) per socket:                      14
+L1d cache:                               544 KiB (14 instances)
+L2 cache:                                11.5 MiB (8 instances)
+L3 cache:                                24 MiB (1 instance)
+Linux 6.17.0-29-generic x86_64
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+perf version 6.17.13

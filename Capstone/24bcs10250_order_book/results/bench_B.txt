@@ -1,0 +1,19 @@
+Implementation B (heap + lazy delete)
+ops: 1000000, runs: 5
+
+run 1: total 121.8 ms  add 77.8 ns  cancel 132.3 ns  bbo 29.9 ns
+run 2: total 125.8 ms  add 89.7 ns  cancel 132.1 ns  bbo 29.7 ns
+run 3: total 114.2 ms  add 73.6 ns  cancel 129.9 ns  bbo 29.4 ns
+run 4: total 114.2 ms  add 73.6 ns  cancel 129.7 ns  bbo 29.6 ns
+run 5: total 114.0 ms  add 73.5 ns  cancel 129.4 ns  bbo 29.6 ns
+
+median of 5 runs
+total time  : 114.2 ms
+ns / add    : 73.6
+ns / cancel : 129.9
+ns / bbo    : 29.6
+
+Final BBO:
+Bid: 99.99 x 3244
+Ask: 100.01 x 2193
+Checksum: 16299856502125393651

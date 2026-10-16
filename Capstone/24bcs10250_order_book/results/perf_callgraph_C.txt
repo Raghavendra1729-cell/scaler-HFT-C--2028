@@ -1,0 +1,56 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu_core/cycles/P'
+# Event count (approx.): 1118572910
+#
+# Overhead  Command  Shared Object         Symbol                                                                                                                                                                               
+# ........  .......  ....................  .....................................................................................................................................................................................
+#
+    23.67%  bench    [vdso]                [.] 0x0000000000000c48
+            |
+            ---0x73aa1f352c4b
+               clock_gettime@@GLIBC_2.17
+               std::chrono::_V2::steady_clock::now()
+               RunResult run_once<ArrayBook>(std::vector<Op, std::allocator<Op> > const&)
+               void bench<ArrayBook>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<Op, std::allocator<Op> > const&, int)
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    22.91%  bench    bench                 [.] RunResult run_once<ArrayBook>(std::vector<Op, std::allocator<Op> > const&)
+            |          
+             --20.89%--RunResult run_once<ArrayBook>(std::vector<Op, std::allocator<Op> > const&)
+                       void bench<ArrayBook>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<Op, std::allocator<Op> > const&, int)
+                       main
+                       __libc_start_call_main
+                       __libc_start_main@@GLIBC_2.34
+                       _start
+
+     9.94%  bench    bench                 [.] std::vector<Order, std::allocator<Order> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Order*, std::vector<Order, std::allocator<Order> > >, unsigned long, Order const&)
+            |          
+             --9.18%--std::vector<Order, std::allocator<Order> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Order*, std::vector<Order, std::allocator<Order> > >, unsigned long, Order const&)
+                       RunResult run_once<ArrayBook>(std::vector<Op, std::allocator<Op> > const&)
+                       void bench<ArrayBook>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<Op, std::allocator<Op> > const&, int)
+                       main
+                       __libc_start_call_main
+                       __libc_start_main@@GLIBC_2.34
+                       _start
+
+     4.20%  bench    bench                 [.] make_workload(int, unsigned int)
+            |          
+             --3.28%--make_workload(int, unsigned int)
+                       main
+                       __libc_start_call_main
+                       __libc_start_main@@GLIBC_2.34
+                       _start
+
+     3.71%  bench    libstdc++.so.6.0.33   [.] std::chrono::_V2::steady_clock::now()
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

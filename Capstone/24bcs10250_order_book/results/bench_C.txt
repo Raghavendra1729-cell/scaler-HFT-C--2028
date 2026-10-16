@@ -1,0 +1,19 @@
+Implementation C (array)
+ops: 1000000, runs: 5
+
+run 1: total 54.4 ms  add 32.3 ns  cancel 45.6 ns  bbo 15.6 ns
+run 2: total 53.5 ms  add 31.6 ns  cancel 42.8 ns  bbo 15.6 ns
+run 3: total 49.1 ms  add 26.1 ns  cancel 42.0 ns  bbo 15.6 ns
+run 4: total 54.7 ms  add 32.5 ns  cancel 46.4 ns  bbo 15.6 ns
+run 5: total 49.0 ms  add 26.0 ns  cancel 41.5 ns  bbo 15.7 ns
+
+median of 5 runs
+total time  : 53.5 ms
+ns / add    : 31.6
+ns / cancel : 42.8
+ns / bbo    : 15.6
+
+Final BBO:
+Bid: 99.99 x 3244
+Ask: 100.01 x 2193
+Checksum: 16299856502125393651

@@ -1,0 +1,11 @@
+Running correctness test...
+
+edge cases  A: ok  B: ok  C: ok
+random workload: 1000000 ops, seed 42, BBO compared after every op
+levels at the end: 5000 bid, 5000 ask
+
+Implementation A: PASS
+Implementation B: PASS
+Implementation C: PASS
+
+All implementations produce identical results.
