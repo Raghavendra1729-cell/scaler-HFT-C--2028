@@ -94,7 +94,7 @@ Complexity, with N live orders, L levels on a side (at most 5000) and d the dept
 
 Then it runs the same 1M op random workload (seed 42) through A, B and C together. After every op it compares the BBO and every cancel result, every 100 ops it compares the top 10 bids and asks, and at the end it compares every level on both sides. A is the reference, so A's PASS comes from the hand-written cases and B and C must also match A.
 
-To check the test itself, I broke each book on purpose in a copy (no rescan in C, never dropping dead prices in B, not erasing empty levels in A, showing empty levels in B's depth) and `--verify` printed FAIL each time.
+I also broke each book on purpose once to make sure `--verify` catches it, and it printed FAIL every time.
 
 ![build and verify](screenshots/01-build-verify.png)
 
@@ -106,15 +106,13 @@ The workload is built once before any timing, with `std::mt19937 rng(42)`:
 - every cancel picks a random live order
 - every 100 ops it also calls `get_bids(10)` and `get_asks(10)`
 
-I use `rng() % n` instead of `uniform_int_distribution` because the distributions give different numbers on mac (libc++) and linux (libstdc++). This way the same seed gives the same ops everywhere, and the checksum on my mac and on the linux laptop came out the same.
+I use `rng() % n` instead of `uniform_int_distribution` so the same seed gives the same ops on mac and linux.
 
 Each add, cancel and BBO call is timed on its own with `std::chrono::steady_clock`. Each book runs 5 times and the median is printed. The final BBO and a checksum of every cancel result, BBO and depth result are printed at the end, so the compiler can't throw the work away. All three books print the same checksum `16299856502125393651`.
 
 ## perf
 
-Machine: 12th Gen Intel Core i7-12700H laptop running Ubuntu with Linux 6.17, g++ 13.3, perf 6.17. My own laptop is a Mac, which has no `perf`, so I borrowed a friend's Ubuntu laptop and ran everything on it over ssh (that's the `ssh orderbook-box` in the window title). Ubuntu runs directly on it (no VM), so all the hardware counters are available.
-
-This CPU has 6 fast P-cores and 8 small E-cores. I ran everything with `taskset -c 0` so it stays on one P-core. Otherwise the OS can move the program between core types in the middle of a run. That's why perf prints a `cpu_atom/...` line as `<not counted>` next to every `cpu_core/...` line: the E-cores were never used, and all the real numbers are on the `cpu_core` lines.
+My Mac doesn't have `perf`, so I ran this part on a friend's Ubuntu laptop. I pinned the program to one core with `taskset -c 0`, so the `cpu_atom` lines in perf show `<not counted>` and the numbers are on the `cpu_core` lines.
 
 ```
 taskset -c 0 perf stat -r 5 -e task-clock,cycles,instructions,branches,branch-misses,cache-misses,L1-dcache-load-misses,dTLB-load-misses,page-faults ./bench --impl A
@@ -122,11 +120,7 @@ taskset -c 0 perf record -g ./bench --impl A
 perf report
 ```
 
-Every counter the assignment asks for worked. The only `<not supported>` line is `cpu_atom/L1-dcache-load-misses`, the E-core version, which doesn't matter because nothing ran there.
-
-`perf stat` covers the whole program, so it also counts building the workload and all 5 runs. That part is the same for all three books.
-
-The `perf report` output for each book is in `results/perf_report_*.txt`, and the version with call stacks is in `results/perf_callgraph_*.txt`. I used them in the report to see where the time goes.
+The `perf report` output for each book is in `results/`.
 
 ## Run output
 
