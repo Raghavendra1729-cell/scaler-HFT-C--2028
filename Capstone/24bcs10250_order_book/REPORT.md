@@ -1,6 +1,6 @@
 # Performance Report
 
-All numbers are from a friend's Ubuntu laptop (Intel i7), with the program pinned to one core. Times are the median of 5 runs of `./bench`. Counters are from `perf stat -r 5`. Raw output is in `results/`.
+All numbers are from a friend's Ubuntu laptop (Intel i7), with the program pinned to one core. Times are the median of 5 runs of `./bench`. Counters are from `perf stat -r 5`, and that output is in `results/`.
 
 | Metric | A map | B heap | C array |
 |---|---|---|---|

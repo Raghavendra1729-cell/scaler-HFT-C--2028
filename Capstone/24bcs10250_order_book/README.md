@@ -13,7 +13,7 @@ I built a resting order book for one instrument three times, with three differen
 1. Wrote the three books behind the same five functions: `add_order`, `cancel_order`, `get_bbo`, `get_bids`, `get_asks`.
 2. Wrote one program, `bench`, that runs the correctness test (`--verify`) or the benchmark for one book (`--impl A|B|C`).
 3. Ran the correctness test first. All three give the same results on a 1M op random workload.
-4. Ran the benchmark, `perf stat` and `perf record` for each book on a Linux laptop and saved the raw output in `results/`.
+4. Ran the benchmark, `perf stat` and `perf record` for each book on a Linux laptop and saved the perf output in `results/`.
 5. Filled the results table and wrote the report from those numbers.
 
 ## Files
@@ -26,7 +26,7 @@ array_book.hpp  Implementation C (fixed arrays indexed by price)
 bench.cpp       workload, --verify and --impl
 Makefile
 REPORT.md       results table and performance analysis
-results/        raw output of verify, bench, perf stat, perf report
+results/        perf stat, perf report and page fault output
 screenshots/
 ```
 
